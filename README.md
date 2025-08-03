@@ -26,7 +26,7 @@ Fullstack Web Developer с уклоном в backend (Laravel + PHP), увере
 - 📧 [dmitrii.bobrikov1988@gmail.com](mailto:dmitrii.bobrikov1988@gmail.com)  
 - 🟦 [Telegram: @webBeaver](https://t.me/webBeaver)  
 - 🐙 [GitHub](https://github.com/yourusername)  
-- 🔗 [LinkedIn](https://linkedin.com/in/yourprofile)
+- 🔗 [LinkedIn](https://www.linkedin.com/in/dmitrii-bobrikov-471130229/)
 
 ## 🎯 Цель
 
