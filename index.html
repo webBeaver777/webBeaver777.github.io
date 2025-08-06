@@ -7,6 +7,8 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='22' fill='%236366f1'/%3E%3Cpath d='M24 10v10m0 0l-4-4m4 4l4-4m-4 4v10m0 0l-4-4m4 4l4-4' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  
   <style>
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(20px); }
@@ -69,9 +71,9 @@
   </style>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen p-4 md:p-10 flex justify-center items-center">
-  <div class="resume-card max-w-4xl w-full mx-auto p-6 md:p-12 rounded-2xl relative overflow-hidden animate-fadeInUp">
+  <div class="resume-card max-w-4xl w-full mx-auto p-6 md:p-12 rounded-2xl relative overflow-hidden">
     
-    <div class="flex justify-between items-start mb-10">
+    <div class="flex justify-between items-start mb-10" data-aos="fade-down" data-aos-delay="0">
       <h1 class="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-indigo-400 to-blue-400 bg-clip-text text-transparent drop-shadow-md">
         Дмитрий Бобриков
       </h1>
@@ -80,7 +82,7 @@
            class="w-24 h-24 rounded-full border-4 border-indigo-500 shadow-lg -mt-8 -mr-8 object-cover transform transition-all duration-300 hover:scale-110 hover:shadow-2xl">
     </div>
 
-    <div class="bg-slate-800 p-4 rounded-xl flex flex-wrap gap-x-6 gap-y-3 text-slate-400 text-sm md:text-base border border-slate-700 animate-fadeInUp" style="animation-delay: 0.2s;">
+    <div class="bg-slate-800 p-4 rounded-xl flex flex-wrap gap-x-6 gap-y-3 text-slate-400 text-sm md:text-base border border-slate-700" data-aos="fade-up" data-aos-delay="100">
       <span class="flex items-center gap-2">
         <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.5V6.5a2.5 2.5 0 00-2.5-2.5h-15a2.5 2.5 0 00-2.5 2.5v11a2.5 2.5 0 002.5 2.5h15a2.5 2.5 0 002.5-2.5v-7M12 16h6"></path></svg>
         Fullstack Web Developer
@@ -101,7 +103,7 @@
 
     <hr class="my-8 border-slate-700">
 
-    <div class="animate-fadeInUp" style="animation-delay: 0.4s;">
+    <div data-aos="fade-up" data-aos-delay="200">
       <h2 class="text-xl font-semibold uppercase tracking-wider pl-4 mb-4">ПРОФИЛЬ</h2>
       <p class="text-slate-300 pl-4 border-l-2 border-slate-700">
         <b>Fullstack разработчик</b> с фокусом на <code>backend (Laravel + PHP)</code>, уверенным фронтом <code>Vue 3 + Tailwind</code> и опытом <code>DevOps</code>. 3+ года коммерческой разработки: от MVP до production, работа с командами, фаундерами и заказчиками напрямую. Строю архитектуру, веду проекты, оптимизирую под бизнес-задачи. Самостоятелен, инициативен, всегда довожу до результата.
@@ -110,10 +112,10 @@
 
     <hr class="my-8 border-slate-700">
 
-    <div class="animate-fadeInUp" style="animation-delay: 0.6s;">
+    <div data-aos="fade-up" data-aos-delay="300">
       <h2 class="text-xl font-semibold uppercase tracking-wider pl-4 mb-4">ОПЫТ РАБОТЫ</h2>
       <div class="pl-4">
-        <div class="job-card bg-slate-800 border-l-4 border-indigo-400 p-4 rounded-xl mb-4 shadow-lg">
+        <div class="job-card bg-slate-800 border-l-4 border-indigo-400 p-4 rounded-xl mb-4 shadow-lg" data-aos="fade-up" data-aos-delay="400">
           <div class="flex justify-between items-start">
             <div>
               <h3 class="font-bold text-lg text-indigo-300">Alex Villas — Fullstack Developer</h3>
@@ -128,7 +130,7 @@
             <li><code>Docker</code>, CI/CD, конфигурация dev/stage/prod окружений</li>
           </ul>
         </div>
-        <div class="job-card bg-slate-800 border-l-4 border-blue-400 p-4 rounded-xl mb-4 shadow-lg">
+        <div class="job-card bg-slate-800 border-l-4 border-blue-400 p-4 rounded-xl mb-4 shadow-lg" data-aos="fade-up" data-aos-delay="500">
           <h3 class="font-bold text-lg text-blue-300">Lado (Meta-Force) — Backend Team Lead</h3>
           <p class="text-slate-400 text-sm italic">Янв 2024 — Нояб 2024 | 🌍 Удалённо</p>
           <ul class="list-disc list-outside pl-5 mt-2 text-slate-300">
@@ -137,7 +139,7 @@
             <li>CI/CD пайплайны, миграции, DevOps-сопровождение</li>
           </ul>
         </div>
-        <div class="job-card bg-slate-800 border-l-4 border-cyan-400 p-4 rounded-xl mb-4 shadow-lg">
+        <div class="job-card bg-slate-800 border-l-4 border-cyan-400 p-4 rounded-xl mb-4 shadow-lg" data-aos="fade-up" data-aos-delay="600">
           <h3 class="font-bold text-lg text-cyan-300">Maxbitsolution — PHP Developer</h3>
           <p class="text-slate-400 text-sm italic">Янв 2023 — Янв 2024 | 🌍 Удалённо</p>
           <ul class="list-disc list-outside pl-5 mt-2 text-slate-300">
@@ -146,7 +148,7 @@
             <li>Рефакторинг легаси, оптимизация SQL, архитектурные улучшения</li>
           </ul>
         </div>
-        <div class="job-card bg-slate-800 border-l-4 border-fuchsia-400 p-4 rounded-xl shadow-lg">
+        <div class="job-card bg-slate-800 border-l-4 border-fuchsia-400 p-4 rounded-xl shadow-lg" data-aos="fade-up" data-aos-delay="700">
           <h3 class="font-bold text-lg text-fuchsia-300">Фриланс — Fullstack Developer</h3>
           <p class="text-slate-400 text-sm italic">2023 — 2024 | 🧑‍💻 Самостоятельно</p>
           <ul class="list-disc list-outside pl-5 mt-2 text-slate-300">
@@ -160,10 +162,10 @@
 
     <hr class="my-8 border-slate-700">
 
-    <div class="animate-fadeInUp" style="animation-delay: 0.8s;">
+    <div data-aos="fade-up" data-aos-delay="800">
       <h2 class="text-xl font-semibold uppercase tracking-wider pl-4 mb-4">СТЕК / НАВЫКИ</h2>
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 text-slate-300 pl-4">
-        <div class="bg-slate-800 p-4 rounded-xl border-l-4 border-indigo-400 shadow-md">
+        <div class="bg-slate-800 p-4 rounded-xl border-l-4 border-indigo-400 shadow-md" data-aos="zoom-in" data-aos-delay="900">
           <h3 class="font-bold text-lg text-indigo-300 mb-2">Backend</h3>
           <ul class="list-disc list-outside pl-5 text-sm">
             <li>Laravel, PHP</li>
@@ -172,7 +174,7 @@
             <li>MySQL, SQL optimization</li>
           </ul>
         </div>
-        <div class="bg-slate-800 p-4 rounded-xl border-l-4 border-blue-400 shadow-md">
+        <div class="bg-slate-800 p-4 rounded-xl border-l-4 border-blue-400 shadow-md" data-aos="zoom-in" data-aos-delay="1000">
           <h3 class="font-bold text-lg text-blue-300 mb-2">Frontend</h3>
           <ul class="list-disc list-outside pl-5 text-sm">
             <li>Vue 3, Composition API</li>
@@ -181,7 +183,7 @@
             <li>SPA, Adaptivity</li>
           </ul>
         </div>
-        <div class="bg-slate-800 p-4 rounded-xl border-l-4 border-cyan-400 shadow-md">
+        <div class="bg-slate-800 p-4 rounded-xl border-l-4 border-cyan-400 shadow-md" data-aos="zoom-in" data-aos-delay="1100">
           <h3 class="font-bold text-lg text-cyan-300 mb-2">DevOps / Tools</h3>
           <ul class="list-disc list-outside pl-5 text-sm">
             <li>Docker, docker-compose</li>
@@ -190,7 +192,7 @@
             <li>Git, SSH, Certs</li>
           </ul>
         </div>
-        <div class="bg-slate-800 p-4 rounded-xl border-l-4 border-fuchsia-400 shadow-md">
+        <div class="bg-slate-800 p-4 rounded-xl border-l-4 border-fuchsia-400 shadow-md" data-aos="zoom-in" data-aos-delay="1200">
           <h3 class="font-bold text-lg text-fuchsia-300 mb-2">Soft Skills</h3>
           <ul class="list-disc list-outside pl-5 text-sm">
             <li>Product-oriented mindset</li>
@@ -204,7 +206,7 @@
     
     <hr class="my-8 border-slate-700">
 
-    <div class="pl-4 animate-fadeInUp" style="animation-delay: 1.0s;">
+    <div class="pl-4" data-aos="fade-up" data-aos-delay="1300">
       <h2 class="text-xl font-semibold uppercase tracking-wider mb-4">ОБРАЗОВАНИЕ</h2>
       <ul class="list-disc list-outside pl-5 text-slate-300 mb-6">
         <li>Высшее техническое</li>
@@ -227,10 +229,18 @@
     
     <hr class="my-8 border-slate-700">
 
-    <div class="text-right text-slate-500 text-sm italic animate-fadeInUp" style="animation-delay: 1.2s;">
+    <div class="text-right text-slate-500 text-sm italic" data-aos="fade-up" data-aos-delay="1400">
       Актуально на август 2025 &nbsp;•&nbsp; <a href="https://t.me/webBeaver" class="hover:text-indigo-400">@webBeaver</a>
     </div>
 
   </div>
+  
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 400, /* Уменьшили длительность анимации */
+      once: true,
+    });
+  </script>
 </body>
 </html>
