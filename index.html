@@ -1,246 +1,496 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Резюме — Дмитрий Бобриков</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='22' fill='%236366f1'/%3E%3Cpath d='M24 10v10m0 0l-4-4m4 4l4-4m-4 4v10m0 0l-4-4m4 4l4-4' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  
-  <style>
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes pulse-light {
-      0%, 100% { box-shadow: 0 0 10px rgba(59, 130, 246, 0.4); }
-      50% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.6); }
-    }
-    @keyframes spin-slow {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Резюме — Дмитрий Бобриков</title>
+    <link rel="icon" type="image/svg+xml"
+          href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='22' fill='%236366f1'/%3E%3Cpath d='M24 10v10m0 0l-4-4m4 4l4-4m-4 4v10m0 0l-4-4m4 4l4-4' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    .animate-fadeInUp { animation: fadeInUp 0.8s ease-out forwards; }
-    .animate-pulse-light { animation: pulse-light 3s ease-in-out infinite; }
-    .animate-spin-slow { animation: spin-slow 3s linear infinite; }
+        @keyframes pulse-light {
+            0%, 100% {
+                box-shadow: 0 0 15px rgba(59, 130, 246, 0.45);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(99, 102, 241, 0.75);
+            }
+        }
 
-    /* Custom styles for professional feel */
-    body {
-        font-family: 'Inter', sans-serif;
-        background: #0f1117;
-        color: #f1f5f9;
-    }
-    .resume-card {
-        background-color: rgba(26, 29, 35, 0.85);
-        backdrop-filter: blur(8px);
-        border: 1px solid #334155;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    }
-    h2 {
-        background: linear-gradient(90deg, #6366f1, #3b82f6);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        border-left: 4px solid #3b82f6;
-    }
-    .contact-link {
-        transition: color 0.3s, text-shadow 0.3s;
-    }
-    .contact-link:hover {
-        color: #3b82f6;
-        text-shadow: 0 0 8px #6366f1;
-    }
-    .job-card {
-        transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .job-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 30px rgba(59, 130, 246, 0.2), 0 0 25px rgba(99, 102, 241, 0.4);
-    }
-    code {
-        background-color: #1e293b;
-        border: 1px solid #334155;
-        box-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
-        transition: background-color 0.3s;
-    }
-    code:hover {
-        background-color: #3b82f6;
-    }
-  </style>
+        @keyframes spin-slow {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .animate-pulse-light {
+            animation: pulse-light 3s ease-in-out infinite;
+        }
+
+        .animate-spin-slow {
+            animation: spin-slow 4s linear infinite;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f1117;
+            color: #e0e7ff;
+            min-height: 100vh;
+            overflow-y: auto;
+        }
+
+        .resume-card {
+            background: rgba(26, 29, 35, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid #334155;
+            box-shadow: 0 12px 40px rgba(30, 41, 59, 0.9);
+            border-radius: 20px;
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2rem 3rem;
+            position: relative;
+        }
+
+        h1, h2, h3 {
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(90deg, #6366f1, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 6px #3b82f6);
+            transition: filter 0.3s ease;
+        }
+
+        h1:hover {
+            filter: drop-shadow(0 0 15px #60a5fa);
+            cursor: default;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            border-left: 5px solid #4f46e5;
+            padding-left: 0.75rem;
+            color: #a5b4fc;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            color: #818cf8;
+        }
+
+        p, li {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #cbd5e1;
+        }
+
+        ul {
+            margin-top: 0.5rem;
+            list-style-type: disc;
+            padding-left: 1.5rem;
+        }
+
+        .contact-info {
+            background-color: #1e293b;
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.25rem 3rem;
+            justify-content: flex-start;
+            align-items: center;
+            border: 1px solid #334155;
+            margin-bottom: 2rem;
+            user-select: none;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #93c5fd;
+            font-weight: 500;
+            cursor: default;
+            text-decoration: none;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .contact-item:hover,
+        .contact-item:focus-visible {
+            color: #3b82f6;
+            text-shadow: 0 0 10px #6366f1;
+            outline-offset: 2px;
+            outline-color: #6366f1;
+            outline-style: solid;
+        }
+
+        .icon {
+            width: 22px;
+            height: 22px;
+            flex-shrink: 0;
+            stroke-width: 2;
+        }
+
+        .profile-text {
+            border-left: 4px solid #4f46e5;
+            padding-left: 1rem;
+            font-weight: 600;
+            color: #cbd5e1;
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            user-select: text;
+        }
+
+        .job-card {
+            background-color: #1e293b;
+            border-radius: 12px;
+            padding: 1.25rem 1.75rem;
+            margin-bottom: 1.5rem;
+            border-left: 6px solid transparent;
+            box-shadow: 0 6px 18px rgba(59, 130, 246, 0.3);
+            transition: box-shadow 0.35s ease, transform 0.3s ease;
+            cursor: default;
+            user-select: text;
+        }
+
+        .job-card:hover,
+        .job-card:focus-within {
+            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.6);
+            transform: translateY(-6px);
+            outline: 2px solid #6366f1;
+            outline-offset: 4px;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .job-title {
+            font-weight: 700;
+            color: #a5b4fc;
+            font-size: 1.2rem;
+        }
+
+        .job-time {
+            font-style: italic;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .badge-current {
+            background-color: #4f46e5;
+            color: #e0e7ff;
+            font-weight: 700;
+            padding: 0.15rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            user-select: none;
+            box-shadow: 0 0 10px #6366f1;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .skill-box {
+            background-color: #1e293b;
+            border-radius: 12px;
+            border-left: 5px solid #818cf8;
+            padding: 1rem 1.25rem;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            transition: box-shadow 0.3s ease;
+            cursor: default;
+            user-select: text;
+        }
+
+        .skill-box:hover {
+            box-shadow: 0 6px 25px rgba(99, 102, 241, 0.7);
+        }
+
+        .skill-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #818cf8;
+        }
+
+        .soft-skills ul {
+            list-style-type: circle;
+            padding-left: 1.5rem;
+        }
+
+        hr {
+            border-color: #334155;
+            margin: 2rem 0;
+        }
+
+        code {
+            background-color: #273449;
+            color: #a5b4fc;
+            padding: 0.1em 0.3em;
+            border-radius: 4px;
+            font-family: 'Fira Mono', monospace;
+            font-weight: 600;
+            user-select: text;
+            transition: background-color 0.3s ease;
+        }
+
+        code:hover {
+            background-color: #3b82f6;
+            color: #f0f9ff;
+            cursor: default;
+        }
+
+        footer {
+            font-size: 0.85rem;
+            color: #64748b;
+            text-align: right;
+            user-select: none;
+        }
+
+        footer a {
+            color: #818cf8;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover,
+        footer a:focus-visible {
+            color: #3b82f6;
+            outline-offset: 2px;
+            outline-color: #6366f1;
+            outline-style: solid;
+        }
+    </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen p-4 md:p-10 flex justify-center items-center">
-  <div class="resume-card max-w-4xl w-full mx-auto p-6 md:p-12 rounded-2xl relative overflow-hidden">
-    
-    <div class="flex justify-between items-start mb-10" data-aos="fade-down" data-aos-delay="0">
-      <h1 class="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-indigo-400 to-blue-400 bg-clip-text text-transparent drop-shadow-md">
-        Дмитрий Бобриков
-      </h1>
-      <img src="https://avatars.githubusercontent.com/u/223519048?s=400&u=dc5b77629005b775d410b6071dd564ddb1d300ff&v=4" 
-           alt="Дмитрий Бобриков" 
-           class="w-24 h-24 rounded-full border-4 border-indigo-500 shadow-lg -mt-8 -mr-8 object-cover transform transition-all duration-300 hover:scale-110 hover:shadow-2xl">
-    </div>
+<body>
+<main class="resume-card" role="main" aria-label="Резюме Дмитрия Бобрикова">
+    <header class="flex justify-between items-center mb-12" data-aos="fade-down" data-aos-delay="0">
+        <h1 tabindex="0">Дмитрий Бобриков</h1>
+        <img src="https://avatars.githubusercontent.com/u/223519048?s=400&u=dc5b77629005b775d410b6071dd564ddb1d300ff&v=4"
+             alt="Фото Дмитрия Бобрикова"
+             class="w-28 h-28 rounded-full border-4 border-indigo-500 shadow-lg object-cover transform transition-transform duration-300 hover:scale-110"/>
+    </header>
 
-    <div class="bg-slate-800 p-4 rounded-xl flex flex-wrap gap-x-6 gap-y-3 text-slate-400 text-sm md:text-base border border-slate-700" data-aos="fade-up" data-aos-delay="100">
-      <span class="flex items-center gap-2">
-        <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.5V6.5a2.5 2.5 0 00-2.5-2.5h-15a2.5 2.5 0 00-2.5 2.5v11a2.5 2.5 0 002.5 2.5h15a2.5 2.5 0 002.5-2.5v-7M12 16h6"></path></svg>
-        Fullstack Web Developer
-      </span>
-      <span class="flex items-center gap-2">
-        <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 12.414a4 4 0 10-5.657 5.657l4.243 4.243a8 8 0 1011.314-11.314l-4.243 4.243z"></path></svg>
-        Da Nang, Vietnam
-      </span>
-      <span class="flex items-center gap-2">
-        <svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-        <a href="mailto:dmitrii.bobrikov1988@gmail.com" class="contact-link">dmitrii.bobrikov1988@gmail.com</a>
-      </span>
-      <span class="flex items-center gap-2">
-        <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h8m-4-4v8m9-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-        <a href="https://t.me/webBeaver" target="_blank" class="contact-link">@webBeaver</a>
-      </span>
-    </div>
+    <section class="contact-info" aria-label="Контактная информация" data-aos="fade-up" data-aos-delay="150">
+        <a href="mailto:dmitrii.bobrikov1988@gmail.com" class="contact-item" aria-label="Email">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+            dmitrii.bobrikov1988@gmail.com
+        </a>
+        <div class="contact-item" aria-label="Профессия">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M21 13.5V6.5a2.5 2.5 0 00-2.5-2.5h-15a2.5 2.5 0 00-2.5 2.5v11a2.5 2.5 0 002.5 2.5h15a2.5 2.5 0 002.5-2.5v-7M12 16h6"/>
+            </svg>
+            Fullstack Web Developer
+        </div>
+        <div class="contact-item" aria-label="Город">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M17.657 16.657L13.414 12.414a4 4 0 10-5.657 5.657l4.243 4.243a8 8 0 1011.314-11.314l-4.243 4.243z"/>
+            </svg>
+            Da Nang, Vietnam
+        </div>
+        <a href="https://t.me/webBeaver" class="contact-item" target="_blank" rel="noopener" aria-label="Telegram">
+            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 12h8m-4-4v8m9-2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round"
+                      stroke-linejoin="round"/>
+            </svg>
+            @webBeaver
+        </a>
+    </section>
 
-    <hr class="my-8 border-slate-700">
+    <section aria-labelledby="profile-heading" class="mb-12" data-aos="fade-up" data-aos-delay="300">
+        <h2 id="profile-heading">Профиль</h2>
+        <p class="profile-text" tabindex="0">
+            Я — <strong>Fullstack-разработчик с фокусом на Laravel/PHP 8+</strong> и полноценным стеком фронтенда на
+            <code>Vue 3 + Tailwind</code>.
+            Более 4 лет профессионального опыта разработки от прототипа до стабильно
+            работающего продукта. Специализируюсь на грамотной архитектуре и глубокой оптимизации, тесно взаимодействуя
+            с бизнес-заказчиками и командами. Веду проекты самостоятельно или выступаю техническим лидером.
 
-    <div data-aos="fade-up" data-aos-delay="200">
-      <h2 class="text-xl font-semibold uppercase tracking-wider pl-4 mb-4">ПРОФИЛЬ</h2>
-      <p class="text-slate-300 pl-4 border-l-2 border-slate-700">
-        <b>Fullstack разработчик</b> с фокусом на <code>backend (Laravel + PHP)</code>, уверенным фронтом <code>Vue 3 + Tailwind</code> и опытом <code>DevOps</code>. 3+ года коммерческой разработки: от MVP до production, работа с командами, фаундерами и заказчиками напрямую. Строю архитектуру, веду проекты, оптимизирую под бизнес-задачи. Самостоятелен, инициативен, всегда довожу до результата.
-      </p>
-    </div>
+            Открыт к продуктовой разработке, удалённой работе и вызовам, где ценится ответственность и инициативность.
+        </p>
+    </section>
 
-    <hr class="my-8 border-slate-700">
+    <section aria-labelledby="experience-heading" class="mb-12" data-aos="fade-up" data-aos-delay="400">
+        <h2 id="experience-heading">Опыт работы</h2>
 
-    <div data-aos="fade-up" data-aos-delay="300">
-      <h2 class="text-xl font-semibold uppercase tracking-wider pl-4 mb-4">ОПЫТ РАБОТЫ</h2>
-      <div class="pl-4">
-        <div class="job-card bg-slate-800 border-l-4 border-indigo-400 p-4 rounded-xl mb-4 shadow-lg" data-aos="fade-up" data-aos-delay="400">
-          <div class="flex justify-between items-start">
-            <div>
-              <h3 class="font-bold text-lg text-indigo-300">Alex Villas — Fullstack Developer</h3>
-              <p class="text-slate-400 text-sm italic">Янв 2025 — настоящее время | 🏝 Вьетнам</p>
+        <article class="job-card border-indigo-500" tabindex="0">
+            <div class="job-header">
+                <h3 class="job-title">Alex Villas — Fullstack Developer</h3>
+                <time datetime="2025-01">Январь 2025 — Настоящее время</time>
+                <span class="badge-current" aria-label="Текущая работа">Текущая</span>
             </div>
-            <span class="text-sm font-semibold text-white bg-indigo-500 rounded-full px-3 py-1">Текущая</span>
-          </div>
-          <ul class="list-disc list-outside pl-5 mt-2 text-slate-300">
-            <li>Разработка и поддержка продукта для бронирования недвижимости</li>
-            <li><code>Laravel</code> + <code>Vue 3</code>: личные кабинеты, формы, админ-панель</li>
-            <li>Настройка авторизации, уведомлений, интеграций (email, SMS)</li>
-            <li><code>Docker</code>, CI/CD, конфигурация dev/stage/prod окружений</li>
-          </ul>
-        </div>
-        <div class="job-card bg-slate-800 border-l-4 border-blue-400 p-4 rounded-xl mb-4 shadow-lg" data-aos="fade-up" data-aos-delay="500">
-          <h3 class="font-bold text-lg text-blue-300">Lado (Meta-Force) — Backend Team Lead</h3>
-          <p class="text-slate-400 text-sm italic">Янв 2024 — Нояб 2024 | 🌍 Удалённо</p>
-          <ul class="list-disc list-outside pl-5 mt-2 text-slate-300">
-            <li>Ведение backend-команды (3+ dev), ревью, архитектура</li>
-            <li><code>Laravel</code>, REST API, WebSockets, event-driven архитектура</li>
-            <li>CI/CD пайплайны, миграции, DevOps-сопровождение</li>
-          </ul>
-        </div>
-        <div class="job-card bg-slate-800 border-l-4 border-cyan-400 p-4 rounded-xl mb-4 shadow-lg" data-aos="fade-up" data-aos-delay="600">
-          <h3 class="font-bold text-lg text-cyan-300">Maxbitsolution — PHP Developer</h3>
-          <p class="text-slate-400 text-sm italic">Янв 2023 — Янв 2024 | 🌍 Удалённо</p>
-          <ul class="list-disc list-outside pl-5 mt-2 text-slate-300">
-            <li>Разработка CRM и внутренних систем</li>
-            <li><code>Laravel</code>, Livewire, <code>Vue 2/3</code>, <code>Tailwind</code>, <code>MySQL</code></li>
-            <li>Рефакторинг легаси, оптимизация SQL, архитектурные улучшения</li>
-          </ul>
-        </div>
-        <div class="job-card bg-slate-800 border-l-4 border-fuchsia-400 p-4 rounded-xl shadow-lg" data-aos="fade-up" data-aos-delay="700">
-          <h3 class="font-bold text-lg text-fuchsia-300">Фриланс — Fullstack Developer</h3>
-          <p class="text-slate-400 text-sm italic">2023 — 2024 | 🧑‍💻 Самостоятельно</p>
-          <ul class="list-disc list-outside pl-5 mt-2 text-slate-300">
-            <li>Полный цикл разработки: от идеи до продакшена</li>
-            <li>API-интеграции, авторизация, работа без PM</li>
-            <li>Улучшение UX, работа с отзывами клиентов напрямую</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+            <p class="job-time text-slate-400 italic mb-2">Вьетнам / Работа в команде и с заказчиком</p>
+            <ul>
+                <li>Разработка и поддержка крупного сервиса бронирования недвижимости</li>
+                <li><code>Laravel</code> + <code>Vue 3</code>: личные кабинеты, формы, админ-панель</li>
+                <li>Настройка авторизации, уведомлений, email и SMS интеграций</li>
+                <li><code>Docker</code>, CI/CD, dev/stage/prod окружения</li>
+            </ul>
+        </article>
 
-    <hr class="my-8 border-slate-700">
+        <article class="job-card border-blue-400" tabindex="0">
+            <div class="job-header">
+                <h3 class="job-title">Holiverse — Backend Team Lead</h3>
+                <time datetime="2024-02">Февраль 2024 — Январь 2025</time>
+            </div>
+            <p class="job-time text-slate-400 italic mb-2">Удалённо / Руководство backend-командой</p>
+            <ul>
+                <li>Ведение команды из 3+ разработчиков, code-review, проектирование архитектуры</li>
+                <li>Laravel, REST API, WebSockets, event-driven подход</li>
+                <li>CI/CD пайплайны, миграции, DevOps сопровождение</li>
+            </ul>
+        </article>
 
-    <div data-aos="fade-up" data-aos-delay="800">
-      <h2 class="text-xl font-semibold uppercase tracking-wider pl-4 mb-4">СТЕК / НАВЫКИ</h2>
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 text-slate-300 pl-4">
-        <div class="bg-slate-800 p-4 rounded-xl border-l-4 border-indigo-400 shadow-md" data-aos="zoom-in" data-aos-delay="900">
-          <h3 class="font-bold text-lg text-indigo-300 mb-2">Backend</h3>
-          <ul class="list-disc list-outside pl-5 text-sm">
-            <li>Laravel, PHP</li>
-            <li>REST API, DTO</li>
-            <li>Queues, Cache, Events</li>
-            <li>MySQL, SQL optimization</li>
-          </ul>
+        <article class="job-card border-cyan-400" tabindex="0">
+            <div class="job-header">
+                <h3 class="job-title">Maxbitsolution — PHP Developer</h3>
+                <time datetime="2022-10">Октябрь 2022 — Февраль 2024</time>
+            </div>
+            <p class="job-time text-slate-400 italic mb-2">Удалённо / Работа с CRM и внутренними системами</p>
+            <ul>
+                <li>Разработка CRM, Livewire, Vue 2/3, Tailwind, MySQL</li>
+                <li>Рефакторинг легаси-кода, SQL оптимизация, улучшение архитектуры</li>
+            </ul>
+        </article>
+
+        <article class="job-card border-fuchsia-400" tabindex="0">
+            <div class="job-header">
+                <h3 class="job-title">Фриланс — Fullstack Developer</h3>
+                <time datetime="2019-01">2019 — 2022</time>
+            </div>
+            <p class="job-time text-slate-400 italic mb-2">Самостоятельно / Полный цикл разработки</p>
+            <ul>
+                <li>От идеи до продакшена с самостоятельным управлением проектами</li>
+                <li>API интеграции, системы авторизации, работа напрямую с клиентами</li>
+                <li>UX-оптимизация и доработка функционала на основе отзывов</li>
+            </ul>
+        </article>
+    </section>
+
+    <section aria-labelledby="skills-heading" class="mb-12" data-aos="fade-up" data-aos-delay="600">
+        <h2 id="skills-heading">Стек / Навыки</h2>
+        <div class="skills-grid" role="list" aria-label="Основные навыки и технологии">
+            <div class="skill-box" role="listitem" tabindex="0">
+                <h3 class="skill-title" style="border-color:#6366f1;">Backend</h3>
+                <ul>
+                    <li>Laravel (8.x–10.x), PHP 8+</li>
+                    <li>REST API, DTO/Service/Action, API Resources</li>
+                    <li>Очереди (Horizon), Events, Webhooks, кеширование</li>
+                    <li>Оптимизация SQL, индексы, миграции, профилирование</li>
+                </ul>
+            </div>
+            <div class="skill-box" role="listitem" tabindex="0">
+                <h3 class="skill-title" style="border-color:#3b82f6;">Frontend</h3>
+                <ul>
+                    <li>Vue 3 (Composition API), Pinia, Vue Router</li>
+                    <li>TailwindCSS, SPA/SSR, адаптивная верстка</li>
+                    <li>Axios, REST-интеграции</li>
+                    <li>Компоненты, формы, drag-n-drop, lazy loading, UX</li>
+                </ul>
+            </div>
+            <div class="skill-box" role="listitem" tabindex="0">
+                <h3 class="skill-title" style="border-color:#06b6d4;">DevOps / Tools</h3>
+                <ul>
+                    <li>Docker, docker-compose, Nginx</li>
+                    <li>CI/CD: GitHub Actions, GitLab CI</li>
+                    <li>Linux (Ubuntu/Debian), systemd, cron, fail2ban</li>
+                    <li>SSL (LetsEncrypt), домены, деплой, логирование</li>
+                </ul>
+            </div>
+            <div class="skill-box soft-skills" role="listitem" tabindex="0">
+                <h3 class="skill-title" style="border-color:#c084fc;">Soft Skills</h3>
+                <ul>
+                    <li>Продуктовое мышление и понимание бизнес-целей</li>
+                    <li>Ответственность, коммуникабельность, гибкость</li>
+                    <li>Навыки отладки и устранения узких мест</li>
+                    <li>Умение легко работать в команде или самостоятельно</li>
+                </ul>
+            </div>
         </div>
-        <div class="bg-slate-800 p-4 rounded-xl border-l-4 border-blue-400 shadow-md" data-aos="zoom-in" data-aos-delay="1000">
-          <h3 class="font-bold text-lg text-blue-300 mb-2">Frontend</h3>
-          <ul class="list-disc list-outside pl-5 text-sm">
-            <li>Vue 3, Composition API</li>
-            <li>Pinia, Vue Router</li>
-            <li>Tailwind CSS, SCSS</li>
-            <li>SPA, Adaptivity</li>
-          </ul>
-        </div>
-        <div class="bg-slate-800 p-4 rounded-xl border-l-4 border-cyan-400 shadow-md" data-aos="zoom-in" data-aos-delay="1100">
-          <h3 class="font-bold text-lg text-cyan-300 mb-2">DevOps / Tools</h3>
-          <ul class="list-disc list-outside pl-5 text-sm">
-            <li>Docker, docker-compose</li>
-            <li>CI/CD (GitHub Actions)</li>
-            <li>Linux, Nginx</li>
-            <li>Git, SSH, Certs</li>
-          </ul>
-        </div>
-        <div class="bg-slate-800 p-4 rounded-xl border-l-4 border-fuchsia-400 shadow-md" data-aos="zoom-in" data-aos-delay="1200">
-          <h3 class="font-bold text-lg text-fuchsia-300 mb-2">Soft Skills</h3>
-          <ul class="list-disc list-outside pl-5 text-sm">
-            <li>Product-oriented mindset</li>
-            <li>Team Leadership</li>
-            <li>Problem Solving</li>
-            <li>Direct Client Communication</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    
-    <hr class="my-8 border-slate-700">
+    </section>
 
-    <div class="pl-4" data-aos="fade-up" data-aos-delay="1300">
-      <h2 class="text-xl font-semibold uppercase tracking-wider mb-4">ОБРАЗОВАНИЕ</h2>
-      <ul class="list-disc list-outside pl-5 text-slate-300 mb-6">
-        <li>Высшее техническое</li>
-        <li>Laravel/Vue/DevOps — практика + самообучение</li>
-      </ul>
+    <section aria-labelledby="education-heading" class="mb-12" data-aos="fade-up" data-aos-delay="800">
+        <h2 id="education-heading">Образование</h2>
+        <ul>
+            <li>Высшее техническое образование</li>
+            <li>Laravel, Vue, DevOps — курсы, практика, самообучение</li>
+        </ul>
+    </section>
 
-      <h2 class="text-xl font-semibold uppercase tracking-wider mb-4">ЯЗЫКИ</h2>
-      <ul class="list-disc list-outside pl-5 text-slate-300 mb-6">
-        <li>🇷🇺 Русский — родной</li>
-        <li>🇬🇧 Английский — уверенный технический, улучшаю разговорный</li>
-      </ul>
+    <section aria-labelledby="languages-heading" class="mb-12" data-aos="fade-up" data-aos-delay="900">
+        <h2 id="languages-heading">Языки</h2>
+        <ul>
+            <li>🇷🇺 Русский — родной</li>
+            <li>🇬🇧 Английский — уверенный технический, активно улучшаю разговорный</li>
+        </ul>
+    </section>
 
-      <h2 class="text-xl font-semibold uppercase tracking-wider mb-4">ДОПОЛНИТЕЛЬНО</h2>
-      <ul class="list-disc list-outside pl-5 text-slate-300">
-        <li>Код и проекты — по запросу</li>
-        <li>Интересует продуктовая разработка с гибкой культурой</li>
-        <li>Поддержка после релиза — часть работы, не проблема</li>
-      </ul>
-    </div>
-    
-    <hr class="my-8 border-slate-700">
+    <section aria-labelledby="additional-heading" class="mb-12" data-aos="fade-up" data-aos-delay="1000">
+        <h2 id="additional-heading">Дополнительно</h2>
+        <ul>
+            <li>Код и проекты — предоставляю по запросу</li>
+            <li>Открыт к продуктовой разработке с гибкой культурой</li>
+            <li>Поддержка продуктов после релиза — часть рабочего процесса</li>
+        </ul>
+    </section>
 
-    <div class="text-right text-slate-500 text-sm italic" data-aos="fade-up" data-aos-delay="1400">
-      Актуально на август 2025 &nbsp;•&nbsp; <a href="https://t.me/webBeaver" class="hover:text-indigo-400">@webBeaver</a>
-    </div>
+    <footer class="text-right" data-aos="fade-up" data-aos-delay="1100">
+        <small>
+            Актуально на сентябрь 2025 &nbsp;&bull;&nbsp; <a href="https://t.me/webBeaver" target="_blank"
+                                                             rel="noopener">Telegram @webBeaver</a>
+        </small>
+    </footer>
+</main>
 
-  </div>
-  
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
+<!-- Animate On Scroll (AOS) -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
     AOS.init({
-      duration: 400, /* Уменьшили длительность анимации */
-      once: true,
+        duration: 550,
+        once: true,
+        easing: 'ease-out-cubic'
     });
-  </script>
+</script>
 </body>
 </html>
