@@ -667,8 +667,79 @@
     </style>
 </head>
 
-<body>
+<body style="cursor: none;">
     <div id="scroll-progress" aria-hidden="true"></div>
+    <!-- Кастомный курсор-указатель и шлейф -->
+    <div class="custom-cursor">
+        <svg class="cursor-pointer-svg" width="38" height="38" viewBox="0 0 38 38" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <polygon points="4,2 34,18 22,21 28,34 20,32 16,22 4,26" fill="url(#pointer-gradient)" stroke="#222"
+                stroke-width="1.5" />
+            <defs>
+                <linearGradient id="pointer-gradient" x1="4" y1="2" x2="28" y2="34"
+                    gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#fff" />
+                    <stop offset="1" stop-color="#6366f1" />
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
+    <div class="cursor-trail" data-trail="0">
+        <svg class="cursor-pointer-svg" width="38" height="38" viewBox="0 0 38 38" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <polygon points="4,2 34,18 22,21 28,34 20,32 16,22 4,26" fill="url(#pointer-gradient-t0)" stroke="#222"
+                stroke-width="1.5" />
+            <defs>
+                <linearGradient id="pointer-gradient-t0" x1="4" y1="2" x2="28" y2="34"
+                    gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#fff" />
+                    <stop offset="1" stop-color="#6366f1" />
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
+    <div class="cursor-trail" data-trail="1">
+        <svg class="cursor-pointer-svg" width="38" height="38" viewBox="0 0 38 38" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <polygon points="4,2 34,18 22,21 28,34 20,32 16,22 4,26" fill="url(#pointer-gradient-t1)" stroke="#222"
+                stroke-width="1.5" />
+            <defs>
+                <linearGradient id="pointer-gradient-t1" x1="4" y1="2" x2="28" y2="34"
+                    gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#fff" />
+                    <stop offset="1" stop-color="#6366f1" />
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
+    <div class="cursor-trail" data-trail="2">
+        <svg class="cursor-pointer-svg" width="38" height="38" viewBox="0 0 38 38" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <polygon points="4,2 34,18 22,21 28,34 20,32 16,22 4,26" fill="url(#pointer-gradient-t2)" stroke="#222"
+                stroke-width="1.5" />
+            <defs>
+                <linearGradient id="pointer-gradient-t2" x1="4" y1="2" x2="28"
+                    y2="34" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#fff" />
+                    <stop offset="1" stop-color="#6366f1" />
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
+    <div class="cursor-trail" data-trail="3">
+        <svg class="cursor-pointer-svg" width="38" height="38" viewBox="0 0 38 38" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <polygon points="4,2 34,18 22,21 28,34 20,32 16,22 4,26" fill="url(#pointer-gradient-t3)" stroke="#222"
+                stroke-width="1.5" />
+            <defs>
+                <linearGradient id="pointer-gradient-t3" x1="4" y1="2" x2="28"
+                    y2="34" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#fff" />
+                    <stop offset="1" stop-color="#6366f1" />
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
     <!-- Particles.js animated background -->
     <div id="particles-js"
         style="position:fixed;inset:0;z-index:0;pointer-events:none;background:linear-gradient(120deg,#0f1117 0%,#232a4d 100%);">
@@ -1139,7 +1210,170 @@
             },
             "retina_detect": true
         });
+
+        // Кастомный курсор-указатель с шлейфом и эффектами
+        const cursor = document.querySelector('.custom-cursor');
+        const trails = Array.from(document.querySelectorAll('.cursor-trail'));
+        let cursorX = 0,
+            cursorY = 0;
+        let targetX = 0,
+            targetY = 0;
+        const trailPositions = Array(trails.length).fill({
+            x: 0,
+            y: 0
+        });
+
+        function animateCursor() {
+            cursorX += (targetX - cursorX) * 0.22;
+            cursorY += (targetY - cursorY) * 0.22;
+            cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
+            let prev = {
+                x: cursorX,
+                y: cursorY
+            };
+            trails.forEach((trail, i) => {
+                let pos = trailPositions[i];
+                pos.x += (prev.x - pos.x) * (0.18 - i * 0.03);
+                pos.y += (prev.y - pos.y) * (0.18 - i * 0.03);
+                trail.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0)`;
+                prev = pos;
+            });
+            requestAnimationFrame(animateCursor);
+        }
+        document.addEventListener('mousemove', e => {
+            targetX = e.clientX - 4;
+            targetY = e.clientY - 2;
+        });
+        animateCursor();
+
+        function setCursorActive(active) {
+            if (active) {
+                cursor.classList.add('custom-cursor--active');
+                trails.forEach(t => t.classList.add('cursor-trail--active'));
+            } else {
+                cursor.classList.remove('custom-cursor--active');
+                trails.forEach(t => t.classList.remove('cursor-trail--active'));
+            }
+        }
+
+        function setCursorDown(down) {
+            if (down) {
+                cursor.classList.add('custom-cursor--down');
+                trails.forEach(t => t.classList.add('cursor-trail--down'));
+            } else {
+                cursor.classList.remove('custom-cursor--down');
+                trails.forEach(t => t.classList.remove('cursor-trail--down'));
+            }
+        }
+        const interactiveSelectors = 'a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])';
+        document.addEventListener('mouseover', e => {
+            if (e.target.closest(interactiveSelectors)) setCursorActive(true);
+        });
+        document.addEventListener('mouseout', e => {
+            if (e.target.closest(interactiveSelectors)) setCursorActive(false);
+        });
+        document.addEventListener('mousedown', e => {
+            if (e.button === 0) setCursorDown(true);
+        });
+        document.addEventListener('mouseup', e => {
+            if (e.button === 0) setCursorDown(false);
+        });
+        document.addEventListener('mouseleave', () => {
+            cursor.style.opacity = '0';
+            trails.forEach(t => t.style.opacity = '0');
+        });
+        document.addEventListener('mouseenter', () => {
+            cursor.style.opacity = '1';
+            trails.forEach(t => t.style.opacity = '1');
+        });
     </script>
+    <style>
+        /* ...existing code... */
+        .custom-cursor {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            z-index: 99999;
+            mix-blend-mode: lighten;
+            opacity: 0.95;
+            transition: background 0.22s, transform 0.18s cubic-bezier(.4, 2, .6, 1), box-shadow 0.22s, filter 0.22s;
+            will-change: transform;
+        }
+
+        .custom-cursor .cursor-pointer-svg {
+            width: 38px;
+            height: 38px;
+            display: block;
+            filter: drop-shadow(0 0 8px #6366f1cc);
+            transition: filter 0.22s, transform 0.18s cubic-bezier(.4, 2, .6, 1);
+        }
+
+        .custom-cursor--active {
+            transform: scale(1.22);
+            filter: drop-shadow(0 0 18px #06b6d4cc);
+        }
+
+        .custom-cursor--down {
+            transform: scale(0.95) rotate(-8deg);
+            filter: drop-shadow(0 0 32px #f59e42cc);
+        }
+
+        .cursor-trail {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            z-index: 99998;
+            opacity: 0.18;
+            filter: blur(4px);
+            transition: background 0.22s, transform 0.18s cubic-bezier(.4, 2, .6, 1), box-shadow 0.22s, opacity 0.18s, filter 0.22s;
+            will-change: transform;
+        }
+
+        .cursor-trail .cursor-pointer-svg {
+            width: 38px;
+            height: 38px;
+            display: block;
+            filter: drop-shadow(0 0 8px #6366f1cc);
+            opacity: 0.7;
+            transition: filter 0.22s, opacity 0.18s;
+        }
+
+        .cursor-trail--active {
+            opacity: 0.28;
+            filter: blur(2.5px);
+        }
+
+        .cursor-trail--down {
+            opacity: 0.32;
+            filter: blur(1.5px) drop-shadow(0 0 18px #f59e42cc);
+        }
+
+        @media (max-width: 640px),
+        (pointer: coarse) {
+
+            .custom-cursor,
+            .cursor-trail {
+                display: none !important;
+            }
+
+            body,
+            html {
+                cursor: auto !important;
+            }
+        }
+    </style>
 </body>
 
 </html>
