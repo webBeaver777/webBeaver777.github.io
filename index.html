@@ -26,6 +26,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
     <style>
         :root {
             --main-bg-gradient: linear-gradient(120deg, #6366f1 0%, #06b6d4 100%);
@@ -113,98 +115,38 @@
                 auto;
         }
 
+        .custom-cursor {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            z-index: 2147483647 !important;
+            mix-blend-mode: lighten;
+            opacity: 0.95;
+            transition: background 0.22s, transform 0.18s cubic-bezier(.4, 2, .6, 1), box-shadow 0.22s, filter 0.22s;
+            will-change: transform;
+        }
+
         .cursor-trail {
             position: fixed;
+            left: 0;
+            top: 0;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             pointer-events: none;
-            z-index: 9999;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: linear-gradient(120deg, #6366f1 60%, #06b6d4 100%);
+            z-index: 2147483647 !important;
             opacity: 0.18;
-            filter: blur(2px);
-            transition: transform .18s cubic-bezier(.4, 2, .6, 1);
-        }
-
-        /* Ripple эффект для кнопок */
-        .ripple {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .ripple:after {
-            content: '';
-            display: block;
-            position: absolute;
-            border-radius: 50%;
-            pointer-events: none;
-            width: 100px;
-            height: 100px;
-            left: 50%;
-            top: 50%;
-            background: rgba(99, 102, 241, 0.18);
-            transform: translate(-50%, -50%) scale(0);
-            transition: transform .5s, opacity .7s;
-            opacity: 0;
-        }
-
-        .ripple:active:after {
-            transform: translate(-50%, -50%) scale(1.2);
-            opacity: 1;
-            transition: 0s;
-        }
-
-        /* Fade/scale анимация появления */
-        .fade-scale {
-            opacity: 0;
-            transform: scale(0.97) translateY(20px);
-            transition: opacity .7s var(--transition-main), transform .7s var(--transition-main);
-        }
-
-        .fade-scale.visible {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-        }
-
-        /* Декоративный фон */
-        .bg-decorations {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .blob {
-            position: absolute;
-            border-radius: 9999px;
-            filter: blur(50px);
-            opacity: .25;
-        }
-
-        .blob-1 {
-            width: 420px;
-            height: 420px;
-            background: radial-gradient(circle at 30% 30%, #6366f1, transparent 60%);
-            top: -90px;
-            left: -90px;
-        }
-
-        .blob-2 {
-            width: 540px;
-            height: 540px;
-            background: radial-gradient(circle at 70% 30%, #06b6d4, transparent 60%);
-            top: 18%;
-            right: -140px;
-        }
-
-        .blob-3 {
-            width: 480px;
-            height: 480px;
-            background: radial-gradient(circle at 50% 70%, #a78bfa, transparent 60%);
-            bottom: -140px;
-            left: 18%;
-            animation-duration: 22s;
+            filter: blur(4px);
+            transition: background 0.22s, transform 0.18s cubic-bezier(.4, 2, .6, 1), box-shadow 0.22s, opacity 0.18s, filter 0.22s;
+            will-change: transform;
         }
 
         .resume-card {
@@ -673,71 +615,90 @@
     <div class="custom-cursor">
         <svg class="cursor-pointer-svg" width="38" height="38" viewBox="0 0 38 38" fill="none"
             xmlns="http://www.w3.org/2000/svg">
-            <polygon points="4,2 34,18 22,21 28,34 20,32 16,22 4,26" fill="url(#pointer-gradient)" stroke="#222"
-                stroke-width="1.5" />
             <defs>
-                <linearGradient id="pointer-gradient" x1="4" y1="2" x2="28" y2="34"
+                <linearGradient id="pointer-gradient" x1="8" y1="4" x2="30" y2="34"
                     gradientUnits="userSpaceOnUse">
                     <stop stop-color="#fff" />
+                    <stop offset="0.5" stop-color="#b3caff" />
                     <stop offset="1" stop-color="#6366f1" />
                 </linearGradient>
+                <filter id="pointer-shadow" x="-4" y="-4" width="46" height="46" filterUnits="userSpaceOnUse">
+                    <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#6366f1"
+                        flood-opacity="0.25" />
+                </filter>
             </defs>
+            <polygon points="7,6 31,18 22,21 27,33 19,31 15,22 7,26" fill="url(#pointer-gradient)" stroke="#222"
+                stroke-width="1.1" filter="url(#pointer-shadow)" rx="2" />
+            <path d="M10 9 L28 19 L21 21 L25 31 L20 30 L16.5 22.5 L10 25" fill="none" stroke="#fff"
+                stroke-width="0.7" opacity="0.25" />
         </svg>
     </div>
     <div class="cursor-trail" data-trail="0">
         <svg class="cursor-pointer-svg" width="38" height="38" viewBox="0 0 38 38" fill="none"
             xmlns="http://www.w3.org/2000/svg">
-            <polygon points="4,2 34,18 22,21 28,34 20,32 16,22 4,26" fill="url(#pointer-gradient-t0)" stroke="#222"
-                stroke-width="1.5" />
             <defs>
-                <linearGradient id="pointer-gradient-t0" x1="4" y1="2" x2="28" y2="34"
+                <linearGradient id="pointer-gradient-t0" x1="8" y1="4" x2="30" y2="34"
                     gradientUnits="userSpaceOnUse">
                     <stop stop-color="#fff" />
+                    <stop offset="0.5" stop-color="#b3caff" />
                     <stop offset="1" stop-color="#6366f1" />
                 </linearGradient>
             </defs>
+            <polygon points="7,6 31,18 22,21 27,33 19,31 15,22 7,26" fill="url(#pointer-gradient-t0)" stroke="#222"
+                stroke-width="1.1" rx="2" />
+            <path d="M10 9 L28 19 L21 21 L25 31 L20 30 L16.5 22.5 L10 25" fill="none" stroke="#fff"
+                stroke-width="0.7" opacity="0.25" />
         </svg>
     </div>
     <div class="cursor-trail" data-trail="1">
         <svg class="cursor-pointer-svg" width="38" height="38" viewBox="0 0 38 38" fill="none"
             xmlns="http://www.w3.org/2000/svg">
-            <polygon points="4,2 34,18 22,21 28,34 20,32 16,22 4,26" fill="url(#pointer-gradient-t1)" stroke="#222"
-                stroke-width="1.5" />
             <defs>
-                <linearGradient id="pointer-gradient-t1" x1="4" y1="2" x2="28" y2="34"
-                    gradientUnits="userSpaceOnUse">
+                <linearGradient id="pointer-gradient-t1" x1="8" y1="4" x2="30"
+                    y2="34" gradientUnits="userSpaceOnUse">
                     <stop stop-color="#fff" />
+                    <stop offset="0.5" stop-color="#b3caff" />
                     <stop offset="1" stop-color="#6366f1" />
                 </linearGradient>
             </defs>
+            <polygon points="7,6 31,18 22,21 27,33 19,31 15,22 7,26" fill="url(#pointer-gradient-t1)" stroke="#222"
+                stroke-width="1.1" rx="2" />
+            <path d="M10 9 L28 19 L21 21 L25 31 L20 30 L16.5 22.5 L10 25" fill="none" stroke="#fff"
+                stroke-width="0.7" opacity="0.25" />
         </svg>
     </div>
     <div class="cursor-trail" data-trail="2">
         <svg class="cursor-pointer-svg" width="38" height="38" viewBox="0 0 38 38" fill="none"
             xmlns="http://www.w3.org/2000/svg">
-            <polygon points="4,2 34,18 22,21 28,34 20,32 16,22 4,26" fill="url(#pointer-gradient-t2)" stroke="#222"
-                stroke-width="1.5" />
             <defs>
-                <linearGradient id="pointer-gradient-t2" x1="4" y1="2" x2="28"
+                <linearGradient id="pointer-gradient-t2" x1="8" y1="4" x2="30"
                     y2="34" gradientUnits="userSpaceOnUse">
                     <stop stop-color="#fff" />
+                    <stop offset="0.5" stop-color="#b3caff" />
                     <stop offset="1" stop-color="#6366f1" />
                 </linearGradient>
             </defs>
+            <polygon points="7,6 31,18 22,21 27,33 19,31 15,22 7,26" fill="url(#pointer-gradient-t2)" stroke="#222"
+                stroke-width="1.1" rx="2" />
+            <path d="M10 9 L28 19 L21 21 L25 31 L20 30 L16.5 22.5 L10 25" fill="none" stroke="#fff"
+                stroke-width="0.7" opacity="0.25" />
         </svg>
     </div>
     <div class="cursor-trail" data-trail="3">
         <svg class="cursor-pointer-svg" width="38" height="38" viewBox="0 0 38 38" fill="none"
             xmlns="http://www.w3.org/2000/svg">
-            <polygon points="4,2 34,18 22,21 28,34 20,32 16,22 4,26" fill="url(#pointer-gradient-t3)" stroke="#222"
-                stroke-width="1.5" />
             <defs>
-                <linearGradient id="pointer-gradient-t3" x1="4" y1="2" x2="28"
+                <linearGradient id="pointer-gradient-t3" x1="8" y1="4" x2="30"
                     y2="34" gradientUnits="userSpaceOnUse">
                     <stop stop-color="#fff" />
+                    <stop offset="0.5" stop-color="#b3caff" />
                     <stop offset="1" stop-color="#6366f1" />
                 </linearGradient>
             </defs>
+            <polygon points="7,6 31,18 22,21 27,33 19,31 15,22 7,26" fill="url(#pointer-gradient-t3)" stroke="#222"
+                stroke-width="1.1" rx="2" />
+            <path d="M10 9 L28 19 L21 21 L25 31 L20 30 L16.5 22.5 L10 25" fill="none" stroke="#fff"
+                stroke-width="0.7" opacity="0.25" />
         </svg>
     </div>
     <!-- Particles.js animated background -->
@@ -1211,166 +1172,130 @@
             "retina_detect": true
         });
 
-        // Кастомный курсор-указатель с шлейфом и эффектами
-        const cursor = document.querySelector('.custom-cursor');
-        const trails = Array.from(document.querySelectorAll('.cursor-trail'));
-        let cursorX = 0,
-            cursorY = 0;
-        let targetX = 0,
-            targetY = 0;
-        const trailPositions = Array(trails.length).fill({
-            x: 0,
-            y: 0
+        // VANTA.js интерактивный фон (реагирует на мышь)
+        VANTA.NET({
+            el: "#particles-js",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.0,
+            scaleMobile: 1.0,
+            color: 0x6366f1,
+            backgroundColor: 0x181c2a,
+            points: 12.0,
+            maxDistance: 22.0,
+            spacing: 18.0
         });
 
-        function animateCursor() {
-            cursorX += (targetX - cursorX) * 0.22;
-            cursorY += (targetY - cursorY) * 0.22;
-            cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
-            let prev = {
-                x: cursorX,
-                y: cursorY
-            };
-            trails.forEach((trail, i) => {
-                let pos = trailPositions[i];
-                pos.x += (prev.x - pos.x) * (0.18 - i * 0.03);
-                pos.y += (prev.y - pos.y) * (0.18 - i * 0.03);
-                trail.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0)`;
-                prev = pos;
+        // Ripple-эффект на фон при клике
+        document.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            ripple.className = 'bg-ripple';
+            ripple.style.left = e.clientX + 'px';
+            ripple.style.top = e.clientY + 'px';
+            document.body.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 900);
+        });
+
+        // Плавная смена свечения SVG-курсора при движении мыши
+        let lastHue = 240;
+        document.addEventListener('mousemove', function(e) {
+            lastHue = (lastHue + 2) % 360;
+            const color = `hsl(${lastHue}, 90%, 65%)`;
+            document.querySelectorAll(
+                    '.custom-cursor .cursor-pointer-svg polygon, .cursor-trail .cursor-pointer-svg polygon')
+                .forEach(el => {
+                    el.style.filter = `drop-shadow(0 0 12px ${color})`;
+                });
+        });
+
+        // === Кастомный SVG-курсор и шлейф ===
+        (function() {
+            const cursor = document.querySelector('.custom-cursor');
+            const trails = Array.from(document.querySelectorAll('.cursor-trail'));
+            let mouseX = window.innerWidth / 2,
+                mouseY = window.innerHeight / 2;
+            let cursorX = mouseX,
+                cursorY = mouseY;
+            const trailPositions = trails.map(() => ({
+                x: mouseX,
+                y: mouseY
+            }));
+
+            // Обновление позиции курсора
+            document.addEventListener('mousemove', function(e) {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
             });
-            requestAnimationFrame(animateCursor);
-        }
-        document.addEventListener('mousemove', e => {
-            targetX = e.clientX - 4;
-            targetY = e.clientY - 2;
-        });
-        animateCursor();
 
-        function setCursorActive(active) {
-            if (active) {
-                cursor.classList.add('custom-cursor--active');
-                trails.forEach(t => t.classList.add('cursor-trail--active'));
-            } else {
-                cursor.classList.remove('custom-cursor--active');
-                trails.forEach(t => t.classList.remove('cursor-trail--active'));
+            function animateCursor() {
+                // Плавное движение основного курсора
+                cursorX += (mouseX - cursorX) * 0.25;
+                cursorY += (mouseY - cursorY) * 0.25;
+                cursor.style.transform = `translate3d(${cursorX - 19}px, ${cursorY - 19}px, 0)`;
+                // Плавное движение шлейфа
+                trailPositions.forEach((pos, i) => {
+                    if (i === 0) {
+                        pos.x += (cursorX - pos.x) * 0.18;
+                        pos.y += (cursorY - pos.y) * 0.18;
+                    } else {
+                        pos.x += (trailPositions[i - 1].x - pos.x) * 0.18;
+                        pos.y += (trailPositions[i - 1].y - pos.y) * 0.18;
+                    }
+                    trails[i].style.transform = `translate3d(${pos.x - 19}px, ${pos.y - 19}px, 0)`;
+                });
+                requestAnimationFrame(animateCursor);
             }
-        }
+            animateCursor();
 
-        function setCursorDown(down) {
-            if (down) {
-                cursor.classList.add('custom-cursor--down');
-                trails.forEach(t => t.classList.add('cursor-trail--down'));
-            } else {
-                cursor.classList.remove('custom-cursor--down');
-                trails.forEach(t => t.classList.remove('cursor-trail--down'));
+            // Скрывать кастомный курсор на мобильных устройствах
+            function updateCursorVisibility() {
+                if (window.matchMedia('(pointer: coarse)').matches) {
+                    cursor.style.display = 'none';
+                    trails.forEach(t => t.style.display = 'none');
+                } else {
+                    cursor.style.display = '';
+                    trails.forEach(t => t.style.display = '');
+                }
             }
-        }
-        const interactiveSelectors = 'a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])';
-        document.addEventListener('mouseover', e => {
-            if (e.target.closest(interactiveSelectors)) setCursorActive(true);
-        });
-        document.addEventListener('mouseout', e => {
-            if (e.target.closest(interactiveSelectors)) setCursorActive(false);
-        });
-        document.addEventListener('mousedown', e => {
-            if (e.button === 0) setCursorDown(true);
-        });
-        document.addEventListener('mouseup', e => {
-            if (e.button === 0) setCursorDown(false);
-        });
-        document.addEventListener('mouseleave', () => {
-            cursor.style.opacity = '0';
-            trails.forEach(t => t.style.opacity = '0');
-        });
-        document.addEventListener('mouseenter', () => {
-            cursor.style.opacity = '1';
-            trails.forEach(t => t.style.opacity = '1');
-        });
+            window.addEventListener('resize', updateCursorVisibility);
+            updateCursorVisibility();
+        })();
     </script>
     <style>
         /* ...existing code... */
-        .custom-cursor {
+        .bg-ripple {
             position: fixed;
-            left: 0;
-            top: 0;
-            width: 38px;
-            height: 38px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             pointer-events: none;
-            z-index: 99999;
-            mix-blend-mode: lighten;
-            opacity: 0.95;
-            transition: background 0.22s, transform 0.18s cubic-bezier(.4, 2, .6, 1), box-shadow 0.22s, filter 0.22s;
-            will-change: transform;
+            z-index: 1;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, #6366f1 0%, #06b6d4 60%, transparent 100%);
+            opacity: 0.22;
+            transform: translate(-50%, -50%);
+            animation: bg-ripple-anim 0.9s cubic-bezier(.4, 2, .6, 1);
         }
 
-        .custom-cursor .cursor-pointer-svg {
-            width: 38px;
-            height: 38px;
-            display: block;
-            filter: drop-shadow(0 0 8px #6366f1cc);
-            transition: filter 0.22s, transform 0.18s cubic-bezier(.4, 2, .6, 1);
-        }
-
-        .custom-cursor--active {
-            transform: scale(1.22);
-            filter: drop-shadow(0 0 18px #06b6d4cc);
-        }
-
-        .custom-cursor--down {
-            transform: scale(0.95) rotate(-8deg);
-            filter: drop-shadow(0 0 32px #f59e42cc);
-        }
-
-        .cursor-trail {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 38px;
-            height: 38px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            pointer-events: none;
-            z-index: 99998;
-            opacity: 0.18;
-            filter: blur(4px);
-            transition: background 0.22s, transform 0.18s cubic-bezier(.4, 2, .6, 1), box-shadow 0.22s, opacity 0.18s, filter 0.22s;
-            will-change: transform;
-        }
-
-        .cursor-trail .cursor-pointer-svg {
-            width: 38px;
-            height: 38px;
-            display: block;
-            filter: drop-shadow(0 0 8px #6366f1cc);
-            opacity: 0.7;
-            transition: filter 0.22s, opacity 0.18s;
-        }
-
-        .cursor-trail--active {
-            opacity: 0.28;
-            filter: blur(2.5px);
-        }
-
-        .cursor-trail--down {
-            opacity: 0.32;
-            filter: blur(1.5px) drop-shadow(0 0 18px #f59e42cc);
-        }
-
-        @media (max-width: 640px),
-        (pointer: coarse) {
-
-            .custom-cursor,
-            .cursor-trail {
-                display: none !important;
+        @keyframes bg-ripple-anim {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 0.32;
             }
 
-            body,
-            html {
-                cursor: auto !important;
+            60% {
+                width: 220px;
+                height: 220px;
+                opacity: 0.18;
+            }
+
+            100% {
+                width: 320px;
+                height: 320px;
+                opacity: 0;
             }
         }
     </style>
