@@ -28,6 +28,14 @@
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <!-- Hover Effect Library (hover-effect.umd.js) for image/text distortion -->
+    <script src="https://unpkg.com/hover-effect.umd.js@1.1.0/dist/hover-effect.umd.js"></script>
+    <!-- Anime.js for additional effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <!-- Three.js for 3D cursor (optional, for advanced cursor) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         /* Удалены неиспользуемые переменные: --card-radius, --shadow-main, --shadow-card, --transition-main, --color-accent2, --color-text, --color-bg */
         :root {
@@ -110,11 +118,11 @@
         }
 
         .custom-cursor {
+            width: 48px;
+            height: 48px;
             position: fixed;
             left: 0;
             top: 0;
-            width: 38px;
-            height: 38px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -125,6 +133,33 @@
             transition: background 0.22s, transform 0.18s cubic-bezier(.4, 2, .6, 1), box-shadow 0.22s, filter 0.22s;
             will-change: transform;
             /* Более мягкое круглое свечение */
+        }
+
+        .custom-cursor .cursor-glow {
+            filter: blur(8px) brightness(1.2);
+            opacity: 0.7;
+            transition: filter 0.3s, opacity 0.3s;
+        }
+
+        .custom-cursor .cursor-dot {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 12px;
+            height: 12px;
+            background: linear-gradient(135deg, #6366f1 60%, #06b6d4 100%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 16px 4px #6366f1aa, 0 0 0 2px #fff2;
+            z-index: 2;
+            transition: box-shadow 0.3s, background 0.3s, width 0.2s, height 0.2s;
+        }
+
+        .custom-cursor.active .cursor-dot {
+            width: 22px;
+            height: 22px;
+            background: linear-gradient(135deg, #06b6d4 60%, #6366f1 100%);
+            box-shadow: 0 0 32px 8px #06b6d4bb, 0 0 0 4px #fff3;
         }
 
         .cursor-trail {
@@ -344,8 +379,35 @@
         }
 
         hr {
-            border-color: #334155;
-            margin: 2rem 0;
+            border: none;
+            height: 3px;
+            background: linear-gradient(90deg, #6366f1 0%, #06b6d4 100%);
+            border-radius: 2px;
+            margin: 2.5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        hr::before {
+            content: '';
+            position: absolute;
+            left: -40%;
+            top: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, #fff8 0%, #06b6d4 100%);
+            filter: blur(8px);
+            animation: hr-glow 2.5s infinite linear;
+        }
+
+        @keyframes hr-glow {
+            0% {
+                left: -40%;
+            }
+
+            100% {
+                left: 100%;
+            }
         }
 
         code {
@@ -463,8 +525,9 @@
         }
 
         .hover-tilt:hover {
-            transform: translateY(-6px) perspective(800px) rotateX(2deg) rotateY(-2deg);
-            box-shadow: 0 16px 48px rgba(99, 102, 241, .35);
+            transform: translateY(-10px) scale(1.04) rotateZ(-1deg) skewY(1deg);
+            box-shadow: 0 20px 60px 0 #6366f1cc, 0 2px 8px #06b6d4aa;
+            filter: brightness(1.08) saturate(1.2);
         }
 
         /* Кастомный скроллбар (легко отключить) */
@@ -608,32 +671,18 @@
     <div id="scroll-progress" aria-hidden="true"></div>
     <!-- Кастомный курсор-указатель и шлейф -->
     <div class="custom-cursor">
-        <svg class="cursor-pointer-svg" width="38" height="38" viewBox="0 0 38 38" fill="none"
-            xmlns="http://www.w3.org/2000/svg">
+        <svg class="cursor-glow" width="48" height="48" viewBox="0 0 48 48" fill="none"
+            style="position:absolute;left:0;top:0;pointer-events:none;">
             <defs>
                 <radialGradient id="pointer-glow" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stop-color="#fff" stop-opacity="0.8" />
-                    <stop offset="60%" stop-color="#6366f1" stop-opacity="0.35" />
+                    <stop offset="0%" stop-color="#fff" stop-opacity="0.9" />
+                    <stop offset="60%" stop-color="#6366f1" stop-opacity="0.25" />
                     <stop offset="100%" stop-color="#06b6d4" stop-opacity="0" />
                 </radialGradient>
-                <linearGradient id="pointer-gradient" x1="8" y1="4" x2="30" y2="34"
-                    gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#fff" offset="" />
-                    <stop offset="0.5" stop-color="#b3caff" />
-                    <stop offset="1" stop-color="#6366f1" />
-                </linearGradient>
-                <filter id="pointer-blur" x="-30" y="-30" width="100" height="100">
-                    <feGaussianBlur stdDeviation="8" result="blur" />
-                </filter>
             </defs>
-            <circle cx="19" cy="19" r="15" fill="url(#pointer-glow)" filter="url(#pointer-blur)"
-                class="cursor-glow pulse-glow" />
-            <polygon points="7,6 31,18 22,21 27,33 19,31 15,22 7,26" fill="url(#pointer-gradient)" stroke="#222"
-                stroke-width="1.1" rx="2" />
-            <path d="M10 9 L28 19 L21 21 L25 31 L20 30 L16.5 22.5 L10 25" fill="none" stroke="#fff"
-                stroke-width="0.7" opacity="0.25" />
+            <circle cx="24" cy="24" r="18" fill="url(#pointer-glow)" />
         </svg>
-        <div class="cursor-sparkle"></div>
+        <div class="cursor-dot"></div>
     </div>
     <div class="cursor-trail" data-trail="0">
         <svg class="cursor-pointer-svg" width="38" height="38" viewBox="0 0 38 38" fill="none"
@@ -644,8 +693,8 @@
                     <stop offset="60%" stop-color="#6366f1" stop-opacity="0.18" />
                     <stop offset="100%" stop-color="#06b6d4" stop-opacity="0" />
                 </radialGradient>
-                <linearGradient id="pointer-gradient-t0" x1="8" y1="4" x2="30"
-                    y2="34" gradientUnits="userSpaceOnUse">
+                <linearGradient id="pointer-gradient-t0" x1="8" y1="4" x2="30" y2="34"
+                    gradientUnits="userSpaceOnUse">
                     <stop stop-color="#fff" />
                     <stop offset="0.5" stop-color="#b3caff" />
                     <stop offset="1" stop-color="#6366f1" />
