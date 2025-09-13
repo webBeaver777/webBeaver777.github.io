@@ -664,6 +664,42 @@
                 margin: 16mm;
             }
         }
+
+        /* Запретить выделение текста по умолчанию */
+        body, html, .resume-card, .job-card, .skill-box, .contact-info, .profile-text, .job-title, .job-time, .badge-current, h1, h2, h3, p, li, .fab, .fab .hint, .fab .btn-wrap, .custom-cursor, .cursor-trail {
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+        /* Разрешить выделение только для кода и email */
+        code, a[href^="mailto:"], .allow-select, .ats-line {
+            user-select: text !important;
+            -webkit-user-select: text !important;
+            -moz-user-select: text !important;
+            -ms-user-select: text !important;
+        }
+        /* Эффект подсветки при попытке выделения */
+        ::selection {
+            background: linear-gradient(90deg, #6366f1 0%, #06b6d4 100%);
+            color: #fff;
+            text-shadow: 0 0 8px #6366f1, 0 0 2px #06b6d4;
+        }
+        /* Для кода — другой цвет выделения */
+        code::selection {
+            background: #3b82f6;
+            color: #fff;
+        }
+        /* Для email — другой цвет выделения */
+        a[href^="mailto:"]::selection {
+            background: #06b6d4;
+            color: #fff;
+        }
+        /* Для .ats-line — мягкая подсветка */
+        .ats-line::selection {
+            background: #818cf8;
+            color: #fff;
+        }
     </style>
 </head>
 
