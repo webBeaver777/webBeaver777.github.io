@@ -29,17 +29,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
     <style>
+        /* Удалены неиспользуемые переменные: --card-radius, --shadow-main, --shadow-card, --transition-main, --color-accent2, --color-text, --color-bg */
         :root {
             --main-bg-gradient: linear-gradient(120deg, #6366f1 0%, #06b6d4 100%);
             --card-bg: rgba(26, 29, 35, 0.92);
-            --card-radius: 20px;
-            --shadow-main: 0 12px 40px rgba(30, 41, 59, 0.9);
-            --shadow-card: 0 4px 15px rgba(59, 130, 246, 0.3);
-            --transition-main: 0.3s cubic-bezier(.4, 2, .6, 1);
             --color-accent: #6366f1;
-            --color-accent2: #06b6d4;
-            --color-text: #e0e7ff;
-            --color-bg: #0f1117;
         }
 
         @keyframes fadeInUp {
@@ -130,6 +124,7 @@
             opacity: 0.95;
             transition: background 0.22s, transform 0.18s cubic-bezier(.4, 2, .6, 1), box-shadow 0.22s, filter 0.22s;
             will-change: transform;
+            /* Более мягкое круглое свечение */
         }
 
         .cursor-trail {
@@ -616,34 +611,51 @@
         <svg class="cursor-pointer-svg" width="38" height="38" viewBox="0 0 38 38" fill="none"
             xmlns="http://www.w3.org/2000/svg">
             <defs>
+                <radialGradient id="pointer-glow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#fff" stop-opacity="0.8" />
+                    <stop offset="60%" stop-color="#6366f1" stop-opacity="0.35" />
+                    <stop offset="100%" stop-color="#06b6d4" stop-opacity="0" />
+                </radialGradient>
                 <linearGradient id="pointer-gradient" x1="8" y1="4" x2="30" y2="34"
                     gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#fff" />
+                    <stop stop-color="#fff" offset="" />
                     <stop offset="0.5" stop-color="#b3caff" />
                     <stop offset="1" stop-color="#6366f1" />
                 </linearGradient>
-                <filter id="pointer-shadow" x="-4" y="-4" width="46" height="46" filterUnits="userSpaceOnUse">
-                    <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#6366f1"
-                        flood-opacity="0.25" />
+                <filter id="pointer-blur" x="-30" y="-30" width="100" height="100">
+                    <feGaussianBlur stdDeviation="8" result="blur" />
                 </filter>
             </defs>
+            <circle cx="19" cy="19" r="15" fill="url(#pointer-glow)" filter="url(#pointer-blur)"
+                class="cursor-glow pulse-glow" />
             <polygon points="7,6 31,18 22,21 27,33 19,31 15,22 7,26" fill="url(#pointer-gradient)" stroke="#222"
-                stroke-width="1.1" filter="url(#pointer-shadow)" rx="2" />
+                stroke-width="1.1" rx="2" />
             <path d="M10 9 L28 19 L21 21 L25 31 L20 30 L16.5 22.5 L10 25" fill="none" stroke="#fff"
                 stroke-width="0.7" opacity="0.25" />
         </svg>
+        <div class="cursor-sparkle"></div>
     </div>
     <div class="cursor-trail" data-trail="0">
         <svg class="cursor-pointer-svg" width="38" height="38" viewBox="0 0 38 38" fill="none"
             xmlns="http://www.w3.org/2000/svg">
             <defs>
-                <linearGradient id="pointer-gradient-t0" x1="8" y1="4" x2="30" y2="34"
-                    gradientUnits="userSpaceOnUse">
+                <radialGradient id="pointer-glow-t0" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#fff" stop-opacity="0.5" />
+                    <stop offset="60%" stop-color="#6366f1" stop-opacity="0.18" />
+                    <stop offset="100%" stop-color="#06b6d4" stop-opacity="0" />
+                </radialGradient>
+                <linearGradient id="pointer-gradient-t0" x1="8" y1="4" x2="30"
+                    y2="34" gradientUnits="userSpaceOnUse">
                     <stop stop-color="#fff" />
                     <stop offset="0.5" stop-color="#b3caff" />
                     <stop offset="1" stop-color="#6366f1" />
                 </linearGradient>
+                <filter id="pointer-blur-t0" x="-30" y="-30" width="100" height="100">
+                    <feGaussianBlur stdDeviation="8" result="blur" />
+                </filter>
             </defs>
+            <circle cx="19" cy="19" r="15" fill="url(#pointer-glow-t0)" filter="url(#pointer-blur-t0)"
+                class="cursor-glow pulse-glow" />
             <polygon points="7,6 31,18 22,21 27,33 19,31 15,22 7,26" fill="url(#pointer-gradient-t0)" stroke="#222"
                 stroke-width="1.1" rx="2" />
             <path d="M10 9 L28 19 L21 21 L25 31 L20 30 L16.5 22.5 L10 25" fill="none" stroke="#fff"
@@ -654,13 +666,23 @@
         <svg class="cursor-pointer-svg" width="38" height="38" viewBox="0 0 38 38" fill="none"
             xmlns="http://www.w3.org/2000/svg">
             <defs>
+                <radialGradient id="pointer-glow-t1" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#fff" stop-opacity="0.5" />
+                    <stop offset="60%" stop-color="#6366f1" stop-opacity="0.18" />
+                    <stop offset="100%" stop-color="#06b6d4" stop-opacity="0" />
+                </radialGradient>
                 <linearGradient id="pointer-gradient-t1" x1="8" y1="4" x2="30"
                     y2="34" gradientUnits="userSpaceOnUse">
                     <stop stop-color="#fff" />
                     <stop offset="0.5" stop-color="#b3caff" />
                     <stop offset="1" stop-color="#6366f1" />
                 </linearGradient>
+                <filter id="pointer-blur-t1" x="-30" y="-30" width="100" height="100">
+                    <feGaussianBlur stdDeviation="8" result="blur" />
+                </filter>
             </defs>
+            <circle cx="19" cy="19" r="15" fill="url(#pointer-glow-t1)" filter="url(#pointer-blur-t1)"
+                class="cursor-glow pulse-glow" />
             <polygon points="7,6 31,18 22,21 27,33 19,31 15,22 7,26" fill="url(#pointer-gradient-t1)" stroke="#222"
                 stroke-width="1.1" rx="2" />
             <path d="M10 9 L28 19 L21 21 L25 31 L20 30 L16.5 22.5 L10 25" fill="none" stroke="#fff"
@@ -671,13 +693,23 @@
         <svg class="cursor-pointer-svg" width="38" height="38" viewBox="0 0 38 38" fill="none"
             xmlns="http://www.w3.org/2000/svg">
             <defs>
+                <radialGradient id="pointer-glow-t2" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#fff" stop-opacity="0.5" />
+                    <stop offset="60%" stop-color="#6366f1" stop-opacity="0.18" />
+                    <stop offset="100%" stop-color="#06b6d4" stop-opacity="0" />
+                </radialGradient>
                 <linearGradient id="pointer-gradient-t2" x1="8" y1="4" x2="30"
                     y2="34" gradientUnits="userSpaceOnUse">
                     <stop stop-color="#fff" />
                     <stop offset="0.5" stop-color="#b3caff" />
                     <stop offset="1" stop-color="#6366f1" />
                 </linearGradient>
+                <filter id="pointer-blur-t2" x="-30" y="-30" width="100" height="100">
+                    <feGaussianBlur stdDeviation="8" result="blur" />
+                </filter>
             </defs>
+            <circle cx="19" cy="19" r="15" fill="url(#pointer-glow-t2)" filter="url(#pointer-blur-t2)"
+                class="cursor-glow pulse-glow" />
             <polygon points="7,6 31,18 22,21 27,33 19,31 15,22 7,26" fill="url(#pointer-gradient-t2)" stroke="#222"
                 stroke-width="1.1" rx="2" />
             <path d="M10 9 L28 19 L21 21 L25 31 L20 30 L16.5 22.5 L10 25" fill="none" stroke="#fff"
@@ -688,13 +720,23 @@
         <svg class="cursor-pointer-svg" width="38" height="38" viewBox="0 0 38 38" fill="none"
             xmlns="http://www.w3.org/2000/svg">
             <defs>
+                <radialGradient id="pointer-glow-t3" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#fff" stop-opacity="0.5" />
+                    <stop offset="60%" stop-color="#6366f1" stop-opacity="0.18" />
+                    <stop offset="100%" stop-color="#06b6d4" stop-opacity="0" />
+                </radialGradient>
                 <linearGradient id="pointer-gradient-t3" x1="8" y1="4" x2="30"
                     y2="34" gradientUnits="userSpaceOnUse">
                     <stop stop-color="#fff" />
                     <stop offset="0.5" stop-color="#b3caff" />
                     <stop offset="1" stop-color="#6366f1" />
                 </linearGradient>
+                <filter id="pointer-blur-t3" x="-30" y="-30" width="100" height="100">
+                    <feGaussianBlur stdDeviation="8" result="blur" />
+                </filter>
             </defs>
+            <circle cx="19" cy="19" r="15" fill="url(#pointer-glow-t3)" filter="url(#pointer-blur-t3)"
+                class="cursor-glow pulse-glow" />
             <polygon points="7,6 31,18 22,21 27,33 19,31 15,22 7,26" fill="url(#pointer-gradient-t3)" stroke="#222"
                 stroke-width="1.1" rx="2" />
             <path d="M10 9 L28 19 L21 21 L25 31 L20 30 L16.5 22.5 L10 25" fill="none" stroke="#fff"
@@ -1204,13 +1246,31 @@
         document.addEventListener('mousemove', function(e) {
             lastHue = (lastHue + 2) % 360;
             const color = `hsl(${lastHue}, 90%, 65%)`;
-            document.querySelectorAll(
-                    '.custom-cursor .cursor-pointer-svg polygon, .cursor-trail .cursor-pointer-svg polygon')
-                .forEach(el => {
-                    el.style.filter = `drop-shadow(0 0 12px ${color})`;
-                });
+            document.querySelectorAll('.cursor-glow').forEach(el => {
+                el.setAttribute('fill', `url(#pointer-glow)`);
+                el.style.filter = '';
+            });
         });
-
+        // Волшебные искры при клике
+        document.addEventListener('click', function(e) {
+            const cursor = document.querySelector('.custom-cursor');
+            const sparkle = cursor.querySelector('.cursor-sparkle');
+            if (!sparkle) return;
+            for (let i = 0; i < 10; i++) {
+                const angle = (Math.PI * 2) * (i / 10);
+                const dist = 24 + Math.random() * 12;
+                const tx = Math.cos(angle) * dist;
+                const ty = Math.sin(angle) * dist;
+                const el = document.createElement('div');
+                el.className = 'spark';
+                el.style.setProperty('--tx', `${tx}px`);
+                el.style.setProperty('--ty', `${ty}px`);
+                el.style.background =
+                    `radial-gradient(circle, #fff 60%, hsl(${lastHue},90%,65%) 100%, transparent 100%)`;
+                sparkle.appendChild(el);
+                setTimeout(() => el.remove(), 700);
+            }
+        });
         // === Кастомный SVG-курсор и шлейф ===
         (function() {
             const cursor = document.querySelector('.custom-cursor');
@@ -1248,6 +1308,7 @@
                 });
                 requestAnimationFrame(animateCursor);
             }
+
             animateCursor();
 
             // Скрывать кастомный курсор на мобильных устройствах
@@ -1260,6 +1321,7 @@
                     trails.forEach(t => t.style.display = '');
                 }
             }
+
             window.addEventListener('resize', updateCursorVisibility);
             updateCursorVisibility();
         })();
@@ -1296,6 +1358,62 @@
                 width: 320px;
                 height: 320px;
                 opacity: 0;
+            }
+        }
+
+        .pulse-glow {
+            animation: pulse-glow 1.6s infinite cubic-bezier(.4, 2, .6, 1);
+            transform-origin: 50% 50%;
+        }
+
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                opacity: 0.7;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.18);
+            }
+        }
+
+        .cursor-sparkle {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            pointer-events: none;
+            width: 0;
+            height: 0;
+            z-index: 2;
+        }
+
+        .spark {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #fff 60%, #6366f1 100%, transparent 100%);
+            opacity: 0.8;
+            pointer-events: none;
+            animation: spark-fly 0.7s linear forwards;
+        }
+
+        @keyframes spark-fly {
+            0% {
+                opacity: 1;
+                transform: scale(1) translate(0, 0);
+            }
+
+            80% {
+                opacity: 0.7;
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(0.7) translate(var(--tx, 0), var(--ty, 0));
             }
         }
     </style>
