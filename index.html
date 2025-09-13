@@ -561,7 +561,18 @@
         }
 
         @media (max-width: 640px) {
-            /* раньше тут сдвигали .side-mail — больше не нужно */
+            .hero-header {
+                min-height: 4.5rem;
+            }
+
+            .hero-name {
+                font-size: 1.45rem;
+            }
+
+            .hero-avatar {
+                width: 72px !important;
+                height: 72px !important;
+            }
         }
 
         /* ======== PRINT STYLES (refactored for production) ======== */
@@ -666,35 +677,62 @@
         }
 
         /* Запретить выделение текста по умолчанию */
-        body, html, .resume-card, .job-card, .skill-box, .contact-info, .profile-text, .job-title, .job-time, .badge-current, h1, h2, h3, p, li, .fab, .fab .hint, .fab .btn-wrap, .custom-cursor, .cursor-trail {
+        body,
+        html,
+        .resume-card,
+        .job-card,
+        .skill-box,
+        .contact-info,
+        .profile-text,
+        .job-title,
+        .job-time,
+        .badge-current,
+        h1,
+        h2,
+        h3,
+        p,
+        li,
+        .fab,
+        .fab .hint,
+        .fab .btn-wrap,
+        .custom-cursor,
+        .cursor-trail {
             user-select: none;
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
         }
+
         /* Разрешить выделение только для кода и email */
-        code, a[href^="mailto:"], .allow-select, .ats-line {
+        code,
+        a[href^="mailto:"],
+        .allow-select,
+        .ats-line {
             user-select: text !important;
             -webkit-user-select: text !important;
             -moz-user-select: text !important;
             -ms-user-select: text !important;
         }
+
         /* Эффект подсветки при попытке выделения */
         ::selection {
             background: linear-gradient(90deg, #6366f1 0%, #06b6d4 100%);
             color: #fff;
             text-shadow: 0 0 8px #6366f1, 0 0 2px #06b6d4;
         }
+
         /* Для кода — другой цвет выделения */
         code::selection {
             background: #3b82f6;
             color: #fff;
         }
+
         /* Для email — другой цвет выделения */
         a[href^="mailto:"]::selection {
             background: #06b6d4;
             color: #fff;
         }
+
         /* Для .ats-line — мягкая подсветка */
         .ats-line::selection {
             background: #818cf8;
@@ -839,11 +877,22 @@
     </div>
 
     <main class="resume-card" role="main" aria-label="Резюме Дмитрия Бобрикова">
-        <header class="flex justify-between items-center mb-6" data-aos="fade-down" data-aos-delay="0">
-            <h1 tabindex="0">Дмитрий Бобриков</h1>
-            <img src="https://avatars.githubusercontent.com/u/223519048?s=400&u=dc5b77629005b775d410b6071dd564ddb1d300ff&v=4"
-                alt="Фото Дмитрия Бобрикова"
-                class="w-28 h-28 rounded-full border-4 border-indigo-500 shadow-lg object-cover transform transition-transform duration-300 hover:scale-110" />
+        <header class="flex justify-between items-center mb-10 relative hero-header" data-aos="fade-down"
+            data-aos-delay="0">
+            <div class="relative flex-1 flex flex-col items-start z-10">
+                <h1 tabindex="0" class="hero-name animate-hero-pulse group">
+                    Дмитрий Бобриков
+                    <span class="hero-glow"></span>
+                </h1>
+            </div>
+            <div class="relative flex-shrink-0 ml-6">
+                <div class="hero-avatar-wrap group">
+                    <img src="https://avatars.githubusercontent.com/u/223519048?s=400&u=dc5b77629005b775d410b6071dd564ddb1d300ff&v=4"
+                        alt="Фото Дмитрия Бобрикова"
+                        class="hero-avatar w-36 h-36 rounded-full border-4 border-indigo-500 shadow-2xl object-cover transition-transform duration-500 group-hover:scale-110 group-hover:shadow-indigo-400/60" />
+                    <span class="avatar-glow"></span>
+                </div>
+            </div>
         </header>
 
         <!-- CTA блок -->
@@ -1500,6 +1549,106 @@
                 opacity: 0;
                 transform: scale(0.7) translate(var(--tx, 0), var(--ty, 0));
             }
+        }
+
+        .hero-header {
+            min-height: 7rem;
+        }
+
+        .hero-name {
+            position: relative;
+            font-size: 2.6rem;
+            font-weight: 900;
+            letter-spacing: 0.03em;
+            background: linear-gradient(90deg, #6366f1 10%, #3b82f6 60%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 8px #6366f199);
+            transition: filter 0.22s, text-shadow 0.22s;
+            z-index: 2;
+            line-height: 1.13;
+            display: inline-block;
+        }
+
+        .hero-name .hero-glow {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 110%;
+            height: 110%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, #6366f1 0%, #06b6d4 60%, transparent 100%);
+            opacity: 0.13;
+            z-index: -1;
+            border-radius: 50%;
+            filter: blur(12px);
+            pointer-events: none;
+            transition: opacity 0.22s;
+        }
+
+        .hero-name:hover,
+        .hero-name:focus-visible {
+            filter: drop-shadow(0 0 18px #60a5fa) drop-shadow(0 0 6px #06b6d4cc);
+        }
+
+        .hero-name:hover .hero-glow,
+        .hero-name:focus-visible .hero-glow {
+            opacity: 0.22;
+        }
+
+        @keyframes hero-pulse {
+
+            0%,
+            100% {
+                text-shadow: 0 0 8px #6366f199, 0 0 0 #06b6d4;
+            }
+
+            50% {
+                text-shadow: 0 0 18px #60a5fa, 0 0 8px #06b6d4;
+            }
+        }
+
+        .animate-hero-pulse {
+            animation: hero-pulse 2.8s cubic-bezier(.4, 2, .6, 1) infinite;
+        }
+
+        .hero-avatar-wrap {
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-avatar {
+            box-shadow: 0 0 0 0 #6366f1, 0 0 18px 4px #6366f1bb;
+            transition: box-shadow 0.28s, transform 0.28s;
+        }
+
+        .hero-avatar-wrap .avatar-glow {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 110%;
+            height: 110%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, #6366f1 0%, #06b6d4 60%, transparent 100%);
+            opacity: 0.13;
+            z-index: -1;
+            border-radius: 50%;
+            filter: blur(12px);
+            pointer-events: none;
+            transition: opacity 0.22s;
+        }
+
+        .hero-avatar-wrap:hover .avatar-glow,
+        .hero-avatar-wrap:focus-within .avatar-glow {
+            opacity: 0.22;
+        }
+
+        .hero-avatar-wrap:hover .hero-avatar,
+        .hero-avatar-wrap:focus-within .hero-avatar {
+            box-shadow: 0 0 0 4px #6366f1bb, 0 0 24px 8px #06b6d4bb;
+            transform: scale(1.04) rotate(-1deg);
         }
     </style>
 </body>
