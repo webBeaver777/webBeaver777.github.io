@@ -1507,6 +1507,45 @@
             window.addEventListener('resize', updateCursorVisibility);
             updateCursorVisibility();
         })();
+
+        // === Контекстное меню с кастомными действиями ===
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            showCustomContextMenu(e);
+        });
+
+        function showCustomContextMenu(e) {
+            // Удалить старое меню, если есть
+            document.querySelectorAll('.custom-context-menu').forEach(el => el.remove());
+            // Создать меню
+            const menu = document.createElement('div');
+            menu.className = 'custom-context-menu';
+            menu.innerHTML = `
+                <button onclick="window.open('https://t.me/webBeaver','_blank')"><svg width='20' height='20' style='vertical-align:middle;margin-right:6px' fill='none' stroke='currentColor' viewBox='0 0 24 24'><polygon points='22 2 15 22 11 13 2 9 22 2'></polygon><line x1='22' y1='2' x2='11' y2='13'></line></svg>Telegram</button>
+                <button onclick="window.open('mailto:dmitrii.bobrikov1988@gmail.com')"><svg width='20' height='20' style='vertical-align:middle;margin-right:6px' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' d='M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'/></svg>Email</button>
+                <button onclick="window.print()"><svg width='20' height='20' style='vertical-align:middle;margin-right:6px' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 9V4h12v5M6 18h12v-6H6v6zm0 0v2m12-2v2M6 12H5a2 2 0 00-2 2v2h3'/></svg>Печать</button>
+                <button onclick="window.open('https://drive.google.com/uc?export=download&id=19YT9hPqUW5GD6ZQam2CXlAijqaMIljmR','_blank')"><svg width='20' height='20' style='vertical-align:middle;margin-right:6px' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M7.5 12l4.5 4.5L16.5 12M12 3v13.5'/></svg>Скачать PDF</button>
+            `;
+            document.body.appendChild(menu);
+            // Позиционирование
+            const menuRect = menu.getBoundingClientRect();
+            let x = e.clientX,
+                y = e.clientY;
+            if (x + 220 > window.innerWidth) x = window.innerWidth - 220;
+            if (y + menu.offsetHeight > window.innerHeight) y = window.innerHeight - menu.offsetHeight - 10;
+            menu.style.left = x + 'px';
+            menu.style.top = y + 'px';
+            // Закрытие по клику вне
+            setTimeout(() => {
+                document.addEventListener('mousedown', hideMenu, {
+                    once: true
+                });
+            }, 0);
+
+            function hideMenu(ev) {
+                if (!menu.contains(ev.target)) menu.remove();
+            }
+        }
     </script>
     <style>
         /* ...existing code... */
@@ -1697,6 +1736,54 @@
         .hero-avatar-wrap:focus-within .hero-avatar {
             box-shadow: 0 0 0 4px #6366f1bb, 0 0 24px 8px #06b6d4bb;
             transform: scale(1.04) rotate(-1deg);
+        }
+
+        .custom-context-menu {
+            position: fixed;
+            z-index: 99999;
+            left: 0;
+            top: 0;
+            min-width: 200px;
+            background: #181c2a;
+            border: 1.5px solid #6366f1;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px #232a4dcc, 0 1.5px 0 #06b6d4;
+            padding: 8px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            animation: fadeInUp 0.18s cubic-bezier(.4, 2, .6, 1);
+        }
+
+        .custom-context-menu button {
+            background: none;
+            border: none;
+            color: #e0e7ff;
+            font-size: 1rem;
+            text-align: left;
+            padding: 8px 18px 8px 16px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background 0.18s, color 0.18s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .custom-context-menu button:hover {
+            background: #232a4d;
+            color: #60a5fa;
+        }
+
+        @media (max-width: 600px) {
+            .custom-context-menu {
+                min-width: 140px;
+                font-size: 0.95rem;
+            }
+
+            .custom-context-menu button {
+                padding: 8px 10px 8px 10px;
+            }
         }
     </style>
 </body>
