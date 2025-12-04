@@ -378,6 +378,17 @@
             padding-left: 1.5rem;
         }
 
+        .project-link {
+            color: #93c5fd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .project-link:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+
         hr {
             border: none;
             height: 3px;
@@ -1422,20 +1433,33 @@
         <!-- Проекты / Достижения -->
         <section aria-labelledby="projects-heading" class="mb-12" data-aos="fade-up" data-aos-delay="360">
             <h2 id="projects-heading">Проекты</h2>
-            <article class="job-card border-emerald-400 hover-tilt" tabindex="0">
-                <div class="job-header">
-                    <h3 class="job-title">HostBeaver Dashboard — self‑hosted экосистема</h3>
-                    <a href="https://hostbeaver.ru/" target="_blank" rel="noopener"
-                        class="text-indigo-300 underline hover:text-indigo-200">hostbeaver.ru</a>
+            <div class="skills-grid">
+                <div class="skill-box hover-tilt" tabindex="0">
+                    <h3 class="skill-title">Holiverse</h3>
+                    <p><a href="https://holiverse.ai/" target="_blank" rel="noopener" class="project-link">holiverse.ai</a></p>
+                    <ul>
+                        <li>AI-powered support chatbot with LLM API integration</li>
+                        <li>Real-time updates via WebSockets</li>
+                        <li>Backend message queue and human handoff</li>
+                    </ul>
                 </div>
-                <p class="job-time text-slate-400 italic mb-2">Pet‑продукт / DevOps + Backend + Frontend</p>
-                <p>
-                    HostBeaver — self‑hosted экосистема для личной продуктивности и автоматизации на собственном сервере
-                    (Laravel, Docker/Traefik, nginx).
-                    В составе: Заметки, Kanban, Резюме, Draw.io, Книги — единая авторизация, интеграция фронтенда и
-                    бэкенда, оркестрация контейнеров и мониторинг в духе self‑hosted и open‑source.
-                </p>
-            </article>
+                <div class="skill-box hover-tilt" tabindex="0">
+                    <h3 class="skill-title">Alex Villas</h3>
+                    <ul>
+                        <li>Booking and payments platform</li>
+                        <li>Reservation modules with Redis caching</li>
+                        <li>CI/CD automation and Docker environments</li>
+                    </ul>
+                </div>
+                <div class="skill-box hover-tilt" tabindex="0">
+                    <h3 class="skill-title">Maxbitsolution — CRM</h3>
+                    <ul>
+                        <li>CRM modules with REST integrations</li>
+                        <li>Frontend migration to Vue 3</li>
+                        <li>RBAC and UX improvements</li>
+                    </ul>
+                </div>
+            </div>
         </section>
 
         <footer class="text-right" data-aos="fade-up" data-aos-delay="1100">
